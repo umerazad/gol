@@ -16,12 +16,18 @@
       align-items: center;
       justify-content: center;
     }
+
+    #fps {
+      white-space: pre;
+      font-family: monospace;
+    }
   </style>
 </head>
 
 <body>
   <noscript>This page contains webassembly and javascript content, please enable javascript in your browser.</noscript>
   <button id="play-resume"></button>
+  <div id="fps"></div>
   <canvas id="gol-canvas" />
   <script src="./bootstrap.js"></script>
 </body>
