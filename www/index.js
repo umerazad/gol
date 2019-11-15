@@ -112,6 +112,23 @@ const drawCells = () => {
     ctx.stroke();
 };
 
+canvas.addEventListener("click", event => {
+    const boundingRect = canvas.getBoundingClientRect();
+
+    const scaleX = canvas.width / boundingRect.width;
+    const scaleY = canvas.height / boundingRect.height;
+
+    const left = (event.clientX - boundingRect.left) * scaleX;
+    const top = (event.clientY - boundingRect.top) * scaleY;
+
+    const row = Math.min(Math.floor(top / (CELL_SIZE + 1)), height - 1);
+    const col = Math.min(Math.floor(left / (CELL_SIZE + 1)), width - 1);
+
+    universe.toggle_cell(row, col);
+
+    drawGrid();
+    drawCells();
+});
 // Start animation.
 
 drawGrid();
