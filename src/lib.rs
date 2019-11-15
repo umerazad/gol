@@ -2,6 +2,9 @@ mod utils;
 use std::fmt;
 
 use wasm_bindgen::prelude::*;
+mod timer;
+
+use timer::Timer;
 
 extern crate web_sys;
 
@@ -41,14 +44,17 @@ pub struct Universe {
     cells: Vec<Cell>,
 }
 
+const HEIGHT: u32 = 128;
+const WIDTH: u32 = 128;
+
 #[wasm_bindgen]
 impl Universe {
     pub fn new() -> Self {
         // Just for debugging purposes.
         utils::set_panic_hook();
 
-        let height = 128;
-        let width = 128;
+        let height = HEIGHT;
+        let width = WIDTH;
 
         let cells = (0..width * height)
             .map(|i| {
@@ -101,6 +107,8 @@ impl Universe {
     /// Drives the life evolution in the game.
     pub fn tick(&mut self) {
         let mut board = self.cells.clone();
+
+        let _timer = Timer::new("Universe::tick");
 
         for i in 0..self.height {
             for j in 0..self.width {
